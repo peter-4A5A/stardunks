@@ -19,6 +19,15 @@
           $view = new view();
           $view->createFormTable($result, $header);
         break;
+      case 'createFormForProduct':
+        // To create the form to create a product
+        $view = new view();
+        $view->createProductForm();
+        break;
+      case 'createPrduct':
+        $sql = "INSERT INTO `Products`(`product_type_code`, `supplier_id`, `product_name`, `product_price`, `other_products_details`) VALUES (:product_type_code, :supplier_id, :product_name, :product_price, :other_products_details)";
+        $crud->
+        break;
     }
   }
 

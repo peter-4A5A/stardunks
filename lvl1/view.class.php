@@ -6,8 +6,8 @@
       // This function create the table where are froms in it
       $res = $row;
       echo "
-      <button type='button'><a href='?do=createproduct'>Create product</a></button>
-      <table class='table-hover'>
+      <button class='col-2' onclick=getRequest('createFormForProduct'); type='button'>Create product</button>
+      <table class='col-12 table-hover'>
 
       ";
       foreach ($header as $rowheader) {
@@ -37,8 +37,9 @@
           }
         }
         echo "
+              <td><button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Read</button></td>
               <td><button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Update</button></td>
-              <td><button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");>Remove!</button></td>";
+              <td><button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");>Delete</button></td>";
         echo "<tr>";
       }
       echo "</table>";
@@ -53,12 +54,11 @@
           <input type='number' id='supplier_id' />
           <div>product name</div>
           <input type='text' id='product_name' />
-          <div></div>
-          <input type='' id='' />
-          <div></div>
-          <input type='' id='' />
-          <div></div>
-          <input type='' id='' />
+          <div>product price</div>
+          <input type='number' id='product_price' />
+          <div>other product details</div>
+          <input type='text' id='other_product_details' />
+          <button type='button' onclick=''>Save!</button>
         </form>
       ";
     }
