@@ -58,7 +58,7 @@
           <input type='number' id='product_price' />
           <div>other product details</div>
           <input type='text' id='other_product_details' />
-          <button type='button' onclick=''>Save!</button>
+          <button type='button' onclick='createData();'>Save!</button>
         </form>
       ";
     }

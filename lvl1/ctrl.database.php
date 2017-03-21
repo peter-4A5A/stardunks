@@ -24,9 +24,9 @@
         $view = new view();
         $view->createProductForm();
         break;
-      case 'createPrduct':
-        $sql = "INSERT INTO `Products`(`product_type_code`, `supplier_id`, `product_name`, `product_price`, `other_products_details`) VALUES (:product_type_code, :supplier_id, :product_name, :product_price, :other_products_details)";
-        $crud->
+      case 'createProduct':
+        $sql = "INSERT INTO `Products`(`product_type_code`, `supplier_id`, `product_name`, `product_price`, `other_products_details`) VALUES ('" . $_POST['product_type_code'] . "','". $_POST['supplier_id'] ."','" . $_POST['product_name'] . "','" . $_POST['product_price'] . "','".$_POST['other_products_details'] . "')";
+        echo $crud->CreateData($sql);
         break;
     }
   }
