@@ -11,7 +11,9 @@
   <script src="main.js"></script>
 
   </head>
-  <body>
-    <div id="content"></div>
+  <body onload="getRequest('getTable');">
+    <div id="content">
+
+    </div>
   </body>
 </html>
