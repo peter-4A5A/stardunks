@@ -7,7 +7,7 @@
       $res = $row;
       echo "
       <button class='col-2' onclick=getRequest('createFormForProduct'); type='button'>Create product</button>
-      <table class='col-12 table-hover'>
+      <table style='text-align: center;' class='col-12 table-hover'>
 
       ";
       foreach ($header as $rowheader) {
@@ -37,9 +37,9 @@
           }
         }
         echo "
-              <td><button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Read</button></td>
-              <td><button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Update</button></td>
-              <td><button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");>Delete</button></td>";
+              <td><button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Read</button>
+              <button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Update</button>
+              <button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");>Delete</button></td>";
         echo "<tr>";
       }
       echo "</table>";

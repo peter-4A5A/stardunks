@@ -33,6 +33,9 @@ function createData() {
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(postParameters);
 }
+function status(status) {
+  $("status").innterHTML = status.responseText;
+}
 function showResult(result) {
   // To display the outcome of a request
   $("content").innerHTML = result.responseText;
