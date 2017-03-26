@@ -29,6 +29,16 @@
         $sql = "INSERT INTO `Products`(`product_type_code`, `supplier_id`, `product_name`, `product_price`, `other_products_details`) VALUES ('" . $_POST['product_type_code'] . "','". $_POST['supplier_id'] ."','" . $_POST['product_name'] . "','" . $_POST['product_price'] . "','".$_POST['other_products_details'] . "')";
         echo $crud->CreateData($sql);
         break;
+      case 'readProduct':
+        $sql = "SELECT * FROM Products WHERE product_id=" . $_REQUEST['product_id'] . "";
+        $headerSQL = "SELECT * FROM Products LIMIT 1";
+
+        $header = $crud->readData($headerSQL);
+        $row = $crud->readData($sql);
+
+        $view = new view();
+        $view->createUpdateForm($row, $header);
+        break;
     }
   }
 
