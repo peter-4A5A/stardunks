@@ -16,23 +16,23 @@ function $(id) {
 }
 function postAction(action) {
   // Action contains on what we gonne do update or delete of create data
-  var productType = $("product_type_code").value;
-  var supplierID = $("supplier_id").value;
-  var productName = $("product_name").value;
-  var productPrice = $("product_price").value;
-  var otherProducts = $("other_product_details").value;
+  var productType = checkValueExists("product_type_code");
+  var supplierID = checkValueExists("supplier_id");
+  var productName = checkValueExists("product_name");
+  var productPrice = checkValueExists("product_price");
+  var other_products_details = checkValueExists("other_products_details");
+  console.log(other_products_details);
 
 
   if (document.getElementById('product_id') != null) {
     console.log("ID EXISTS");
     // if the product exists we use a diffrent post parameters with a ID included
     var product_id = $("product_id").value;
-    var postParameters = "do=" + action + "product_id=" + product_id + "&product_type_code=" + productType + "&supplier_id=" + supplierID + "&product_name=" + productName + "&product_price=" + productPrice + "&other_products_details=" + otherProducts;
-
+    var postParameters = "do=" + action + "&product_id=" + product_id + "&product_type_code=" + productType + "&supplier_id=" + supplierID + "&product_name=" + productName + "&product_price=" + productPrice + "&other_products_details=" + other_products_details;
   }
   else {
     console.log("Deosnt exists");
-    var postParameters = "do=" + action + "&product_type_code=" + productType + "&supplier_id=" + supplierID + "&product_name=" + productName + "&product_price=" + productPrice + "&other_products_details=" + otherProducts;
+    var postParameters = "do=" + action + "&product_type_code=" + productType + "&supplier_id=" + supplierID + "&product_name=" + productName + "&product_price=" + productPrice + "&other_products_details=" + other_products_details;
 
   }
 
@@ -40,13 +40,26 @@ function postAction(action) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      showResult(this);
+     alert("Updated");
+     getRequest("getTable");
     }
   };
-  console.log(action);
+  console.log(postParameters);
   // contains te post values
-  xhttp.open("POST", "ctrl.database.php?do=createProduct", true);
+  xhttp.open("POST", "ctrl.database.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(postParameters);
+}
+function checkValueExists(element) {
+  // This function check if the value has a value
+  // If it doen't have one we set "" as value
+  element = $(element);
+  if (element.value != null) {
+    return(element.value);
+  }
+  else {
+    return("NULL");
+  }
 }
 function status(status) {
   $("status").innterHTML = status.responseText;

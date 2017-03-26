@@ -57,7 +57,7 @@
           <div>product price</div>
           <input type='number' id='product_price' />
           <div>other product details</div>
-          <input type='text' id='other_product_details' />
+          <input type='text' id='other_products_details' />
           <button type='button' onclick='postAction('createProduct');'>Save!</button>
         </form>
       ";
@@ -105,7 +105,7 @@
         echo "</tr>";
         echo "</table>";
       }
-      echo "<button type='button' style='margin-top: 5px;' postAction('update');>Save!</button>";
+      echo "<button type='button' style='margin-top: 5px;' onclick=postAction('updateProduct');>Save!</button>";
     }
   }
 

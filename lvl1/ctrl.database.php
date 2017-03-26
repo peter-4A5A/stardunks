@@ -39,6 +39,10 @@
         $view = new view();
         $view->createUpdateForm($row, $header);
         break;
+      case 'updateProduct':
+        $sql = "UPDATE `Products` SET `product_type_code`='" . $_REQUEST['product_type_code'] . "',`supplier_id`='" . $_REQUEST['supplier_id'] . "',`product_name`='" . $_REQUEST['product_name'] . "',`product_price`='" . $_REQUEST['product_price'] . "',`other_products_details`='" . $_REQUEST['other_products_details'] . "' WHERE product_id='" . $_REQUEST['product_id'] . "'";
+        echo $crud->UpdateData($sql);
+        break;
     }
   }
 
