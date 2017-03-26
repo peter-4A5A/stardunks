@@ -9,7 +9,7 @@
 
     switch ($_REQUEST['do']) {
       case 'getTable':
-          $sql = "SELECT * FROM Products";
+          $sql = "SELECT * FROM Products LIMIT 0, 5";
           $headerSQL = "SELECT * FROM Products LIMIT 1";
           $header = $crud->readData($headerSQL);
 

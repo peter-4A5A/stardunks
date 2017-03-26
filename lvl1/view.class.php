@@ -37,9 +37,9 @@
           }
         }
         echo "
-              <td><button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Read</button>
-              <button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");>Update</button>
-              <button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");>Delete</button></td>";
+              <td><button class='btn btn-secondary' type='button' onclick=readData(" . $row['product_id'] . ");><i class='fa fa-book' aria-hidden='true'></i>Read</button>
+              <button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");><i class='fa fa-pencil' aria-hidden='true'></i>Update</button>
+              <button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");><i class='fa fa-trash-o' aria-hidden='true'></i>Delete</button></td>";
         echo "<tr>";
       }
       echo "</table>";
