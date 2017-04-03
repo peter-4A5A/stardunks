@@ -56,6 +56,7 @@
 
         break;
       case 'getPage':
+
         $pageNumber = $_REQUEST['pageNumber'] * 5;
         $previousPage = $_REQUEST['pageNumber'] * 5;
         $previousPage = $previousPage - 5;
@@ -68,6 +69,18 @@
 
         $view = new view();
         $view->createFormTable($row, $header);
+
+        break;
+      case 'search':
+        $product_name = $_REQUEST['searchValue'];
+        $sql = "SELECT * FROM Products WHERE product_name=%" . $product_name . "%";
+        $headerSQL = "SELECT * FROM Products LIMIT 1";
+
+        $header = $crud->readData($headerSQL);
+        $result = $crud->readData($sql);
+
+        $view = new view();
+        $view->createFormTable($result, $header);
 
         break;
     }

@@ -9,6 +9,18 @@ function getRequest(request) {
   xhttp.open("GET", "ctrl.database.php?do=" + request, true);
   xhttp.send();
 }
+function searchItem(searchValue) {
+  // Search a item
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     $("content").innerHTML = this.responseText;
+    }
+  };
+  searchValue = searchValue.value
+  xhttp.open("GET", "ctrl.database.php?do=search&searchValue=" + searchValue, true);
+  xhttp.send();
+}
 function $(id) {
   // To select a div
   var element = document.getElementById(id);
