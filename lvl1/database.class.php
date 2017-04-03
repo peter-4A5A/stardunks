@@ -45,6 +45,18 @@
           return ("Couldn't read data: " . $e->getMessage());
       }
     }
+    function countRow($sql) {
+      try {
+        $conn = $this->conn;
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $row = $query->rowCount();
+        // $row = $conn->query($sql);
+        return($row);
+      } catch (Exception $e) {
+          return ("Couldn't read data: " . $e->getMessage());
+      }
+    }
     function UpdateData($sql) {
       try {
         $conn = $this->conn;

@@ -6,7 +6,6 @@
     require 'view.class.php';
 
     $crud = new DbHandler("localhost","stardunks","root","1234");
-
     switch ($_REQUEST['do']) {
       case 'getTable':
           $sql = "SELECT * FROM Products LIMIT 0, 5";
@@ -42,6 +41,34 @@
       case 'updateProduct':
         $sql = "UPDATE `Products` SET `product_type_code`='" . $_REQUEST['product_type_code'] . "',`supplier_id`='" . $_REQUEST['supplier_id'] . "',`product_name`='" . $_REQUEST['product_name'] . "',`product_price`='" . $_REQUEST['product_price'] . "',`other_products_details`='" . $_REQUEST['other_products_details'] . "' WHERE product_id='" . $_REQUEST['product_id'] . "'";
         echo $crud->UpdateData($sql);
+        break;
+      case 'page':
+      // Get the amount of pages we have
+        $sql = "SELECT * FROM Products";
+        $result = $crud->countRow($sql);
+
+        $result = $result / 5;
+        $result = ceil($result);
+
+        $view = new view();
+        $view->createPages($result);
+
+
+        break;
+      case 'getPage':
+        $pageNumber = $_REQUEST['pageNumber'] * 5;
+        $previousPage = $_REQUEST['pageNumber'] * 5;
+        $previousPage = $previousPage - 5;
+
+        $sql = "SELECT * FROM Products LIMIT " . $previousPage . "," . $pageNumber . "";
+        $headerSQL = "SELECT * FROM Products LIMIT 1";
+
+        $row = $crud->readData($sql);
+        $header = $crud->readData($headerSQL);
+
+        $view = new view();
+        $view->createFormTable($row, $header);
+
         break;
     }
   }

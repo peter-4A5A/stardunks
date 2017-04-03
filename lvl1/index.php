@@ -10,13 +10,15 @@
 
   <link rel="stylesheet" href="style/grid.css" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
   <script src="main.js"></script>
 
   </head>
-  <body onload="getRequest('getTable');">
+  <body onload='getRequest("getTable"); getPages();'>
     <div class="row">
       <div id="content">
+      </div>
+      <div id="pages">
       </div>
     </div>
   </body>

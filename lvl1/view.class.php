@@ -107,6 +107,16 @@
       }
       echo "<button type='button' style='margin-top: 5px;' onclick=postAction('updateProduct');>Save!</button>";
     }
+    public function createPages($times) {
+      // This function generates the pages
+      echo "<ul class='col-12 underline'>";
+      for ($i=0; $i < $times; $i++) {
+        echo "
+          <li onclick=GoToPage('" . $times . "');>" . $times . "</li>
+        ";
+      }
+      echo "</ul>";
+    }
   }
 
 ?>

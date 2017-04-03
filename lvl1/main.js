@@ -21,17 +21,13 @@ function postAction(action) {
   var productName = checkValueExists("product_name");
   var productPrice = checkValueExists("product_price");
   var other_products_details = checkValueExists("other_products_details");
-  console.log(other_products_details);
-
 
   if (document.getElementById('product_id') != null) {
-    console.log("ID EXISTS");
     // if the product exists we use a diffrent post parameters with a ID included
     var product_id = $("product_id").value;
     var postParameters = "do=" + action + "&product_id=" + product_id + "&product_type_code=" + productType + "&supplier_id=" + supplierID + "&product_name=" + productName + "&product_price=" + productPrice + "&other_products_details=" + other_products_details;
   }
   else {
-    console.log("Deosnt exists");
     var postParameters = "do=" + action + "&product_type_code=" + productType + "&supplier_id=" + supplierID + "&product_name=" + productName + "&product_price=" + productPrice + "&other_products_details=" + other_products_details;
 
   }
@@ -44,7 +40,6 @@ function postAction(action) {
      getRequest("getTable");
     }
   };
-  console.log(postParameters);
   // contains te post values
   xhttp.open("POST", "ctrl.database.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -60,6 +55,28 @@ function checkValueExists(element) {
   else {
     return("NULL");
   }
+}
+function getPages() {
+  // This function gets the pages
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     $("pages").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "ctrl.database.php?do=page", true);
+  xhttp.send();
+}
+function GoToPage(pageNumber) {
+  console.log(pageNumber);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     showResult(this);
+    }
+  };
+  xhttp.open("GET", "ctrl.database.php?do=getPage&pageNumber=" + pageNumber, true);
+  xhttp.send();
 }
 function status(status) {
   $("status").innterHTML = status.responseText;
