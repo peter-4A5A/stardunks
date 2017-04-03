@@ -73,14 +73,22 @@
         break;
       case 'search':
         $product_name = $_REQUEST['searchValue'];
-        $sql = "SELECT * FROM Products WHERE product_name=%" . $product_name . "%";
+        // $sql = "SELECT * FROM Products WHERE product_name LIKE % " . $product_name . " %";
+        $sql = "SELECT * FROM Products WHERE product_name LIKE '%' '" . $product_name . "' '%'";
         $headerSQL = "SELECT * FROM Products LIMIT 1";
 
         $header = $crud->readData($headerSQL);
         $result = $crud->readData($sql);
 
-        $view = new view();
-        $view->createFormTable($result, $header);
+        $rowCount = $crud->countRow($sql);
+        if ($rowCount == 0) {
+          // We do nothing
+        }
+        else if ($rowCount > 0){
+          $view = new view();
+          $view->createFormTable($result, $header);
+        }
+
 
         break;
     }
