@@ -6,7 +6,6 @@
       // This function create the table where are froms in it
       $res = $row;
       echo "
-      <button class='col-2' onclick=getRequest('createFormForProduct'); type='button'>Create product</button>
       <table style='text-align: center;' class='col-12 table-hover'>
 
       ";
@@ -109,10 +108,10 @@
     }
     public function createPages($times) {
       // This function generates the pages
-      echo "<ul class='col-12 underline'>";
-      for ($i=0; $i < $times; $i++) {
+      echo "<ul class='col-12 inline underline'>";
+      for ($i=1; $i < $times; $i++) {
         echo "
-          <li onclick=GoToPage('" . $times . "');>" . $times . "</li>
+          <li onclick=GoToPage('" . $i . "');>" . $i . "</li>
         ";
       }
       echo "</ul>";

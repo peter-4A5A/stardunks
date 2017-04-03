@@ -57,11 +57,13 @@
         break;
       case 'getPage':
 
-        $pageNumber = $_REQUEST['pageNumber'] * 5;
-        $previousPage = $_REQUEST['pageNumber'] * 5;
-        $previousPage = $previousPage - 5;
+        $startsFrom = $_REQUEST['pageNumber'] * 5;
+        // This variable used to get the page number and * 5 to get the next page
 
-        $sql = "SELECT * FROM Products LIMIT " . $previousPage . "," . $pageNumber . "";
+        $sql = "SELECT * FROM Products LIMIT " . $startsFrom . "," . 5 . "";
+        // Starts from is the startsfrom that contains where we Start
+        // 5 is thew max amount of rows
+
         $headerSQL = "SELECT * FROM Products LIMIT 1";
 
         $row = $crud->readData($sql);
