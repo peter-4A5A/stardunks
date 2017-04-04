@@ -61,9 +61,9 @@ function postAction(action) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     showResult(this);
+    //  showResult(this);
      alert("Updated");
-     getRequest("getTable");
+     GoToPage("0");
     }
   };
   // contains te post values
