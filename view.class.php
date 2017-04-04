@@ -28,6 +28,10 @@
             // So we only display it
             echo "<td>" . $value . "</td>";
           }
+          else if ($key == "product_price") {
+            // If we need to display a euro
+            echo "<td>&euro; " . $value . "</td>";
+          }
           else {
             // If the value isn't nummeric
             echo "
@@ -46,7 +50,7 @@
     public function createProductForm() {
       // This function creates the form
       echo "
-        <form>
+        <form class='col-12'>
           <div>Product Type Code</div>
           <input type='number' id='product_type_code'/>
           <div>supplier id</div>

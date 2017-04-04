@@ -69,9 +69,10 @@
 
         break;
       case 'search':
-        $product_name = $_REQUEST['searchValue'];
+        $searchKeyword = $_REQUEST['searchValue'];
         // $sql = "SELECT * FROM Products WHERE product_name LIKE % " . $product_name . " %";
-        $sql = "SELECT * FROM Products WHERE product_name LIKE '%' '" . $product_name . "' '%'";
+        // $sql = "SELECT * FROM Products WHERE product_name LIKE '%' '" . $product_name . "' '%'";
+        $sql = "SELECT * FROM Products WHERE product_name LIKE '%' '" . $searchKeyword . "' '%' OR other_products_details LIKE '%' '" . $searchKeyword . "' '%'";
         $headerSQL = "SELECT * FROM Products LIMIT 1";
 
         $header = $crud->readData($headerSQL);
