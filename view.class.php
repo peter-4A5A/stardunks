@@ -23,11 +23,6 @@
         // To display the content
         echo "<tr>";
         foreach ($row as $key => $value) {
-          if (is_numeric($value)) {
-            // If the value is numeric it is a ID
-            // So we only display it
-            echo "<td>" . $value . "</td>";
-          }
           else if ($key == "product_price") {
             // If we need to display a euro
             echo "<td>&euro; " . $value . "</td>";
@@ -41,8 +36,8 @@
         }
         echo "
               <td><button class='btn btn-secondary' type='button' onclick=getRequest('readProduct&product_id=" . $row['product_id'] . "');><i class='fa fa-book' aria-hidden='true'></i>Read</button>
-              <button class='btn btn-secondary' type='button' onclick=updateData(" . $row['product_id'] . ");><i class='fa fa-pencil' aria-hidden='true'></i>Update</button>
-              <button class='btn btn-secondary' type='button' onclick=deleteData(" . $row['product_id'] . ");><i class='fa fa-trash-o' aria-hidden='true'></i>Delete</button></td>";
+              <button class='btn btn-secondary' type='button' onclick=getRequest('getUpdateProduct&productID=" . $row['product_id'] . "');><i class='fa fa-pencil' aria-hidden='true'></i>Update</button>
+              <button class='btn btn-secondary' type='button' onclick=getRequest('delete&productID=" . $row['product_id'] . "');><i class='fa fa-trash-o' aria-hidden='true'></i>Delete</button></td>";
         echo "<tr>";
       }
       echo "</table>";
