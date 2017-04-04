@@ -26,6 +26,20 @@ function $(id) {
   var element = document.getElementById(id);
   return(element);
 }
+function deleteData(id) {
+  // Delete a item
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     showResult(this);
+    //  getRequest("getTable");
+    //  getPages();
+     console.log(id);
+    }
+  };
+  xhttp.open("GET", "ctrl.database.php?do=delete&id=" + id, true);
+  xhttp.send();
+}
 function postAction(action) {
   // Action contains on what we gonne do update or delete of create data
   var productType = checkValueExists("product_type_code");

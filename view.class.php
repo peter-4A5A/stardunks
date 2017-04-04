@@ -6,7 +6,7 @@
       // This function create the table where are froms in it
       $res = $row;
       echo "
-      <table style='text-align: center;' class='col-12 table-hover'>
+      <table style='text-align: center;' class='col-11 table-hover'>
 
       ";
       foreach ($header as $rowheader) {
@@ -76,7 +76,7 @@
           }
           else {
             echo "
-              <th>" . $key . "</th>
+              <th class='col-2'>" . $key . "</th>
             ";
             $headerLenght++;
           }
@@ -95,7 +95,7 @@
           }
           else {
             // If the value isn't nummeric
-              echo "<td>";
+              echo "<td class='col-2'>";
               echo "<input type='text' id='" . $key . "' value='" . $value ."'/ >";
               echo "</td>";
             $rowLenght++;
@@ -104,17 +104,21 @@
         echo "</tr>";
         echo "</table>";
       }
-      echo "<button type='button' style='margin-top: 5px;' onclick=postAction('updateProduct');>Save!</button>";
+      echo "<button type='button' class='col-1' style='margin-top: 5px;' onclick=postAction('updateProduct');>Save!</button>";
     }
     public function createPages($times) {
       // This function generates the pages
       echo "<ul class='col-12 inline underline'>";
-      for ($i=1; $i < $times; $i++) {
+      for ($i=0; $i < $times; $i++) {
         echo "
           <li onclick=GoToPage('" . $i . "');>" . $i . "</li>
         ";
       }
       echo "</ul>";
+    }
+    public function displayMessage($message) {
+      // To display a short message
+      echo $message;
     }
   }
 

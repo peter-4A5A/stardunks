@@ -6,6 +6,7 @@
     require 'view.class.php';
 
     $crud = new DbHandler("localhost","stardunks","root","1234");
+    $view = new view();
     switch ($_REQUEST['do']) {
       case 'getTable':
           $sql = "SELECT * FROM Products LIMIT 0, 5";
@@ -14,13 +15,11 @@
 
           $result = $crud->readData($sql);
           // Get the data
-          // var_dump($result);
-          $view = new view();
+
           $view->createFormTable($result, $header);
         break;
       case 'createFormForProduct':
         // To create the form to create a product
-        $view = new view();
         $view->createProductForm();
         break;
       case 'createProduct':
@@ -35,7 +34,6 @@
         $header = $crud->readData($headerSQL);
         $row = $crud->readData($sql);
 
-        $view = new view();
         $view->createUpdateForm($row, $header);
         break;
       case 'updateProduct':
@@ -50,13 +48,11 @@
         $result = $result / 5;
         $result = ceil($result);
 
-        $view = new view();
         $view->createPages($result);
 
 
         break;
       case 'getPage':
-
         $startsFrom = $_REQUEST['pageNumber'] * 5;
         // This variable used to get the page number and * 5 to get the next page
 
@@ -69,7 +65,6 @@
         $row = $crud->readData($sql);
         $header = $crud->readData($headerSQL);
 
-        $view = new view();
         $view->createFormTable($row, $header);
 
         break;
@@ -85,14 +80,16 @@
         $rowCount = $crud->countRow($sql);
         if ($rowCount == 0) {
           // We do nothing
+          $view->displayMessage("Niks gevonden");
         }
         else if ($rowCount > 0){
-          $view = new view();
           $view->createFormTable($result, $header);
         }
-
-
         break;
+        case 'delete':
+          $sql = "DELETE FROM `Products` WHERE product_id=" . $_REQUEST['id'] . "";
+          echo $crud->deleteData($sql);
+          break;
     }
   }
 
