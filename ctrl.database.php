@@ -28,15 +28,31 @@
         echo $crud->CreateData($sql);
         break;
       case 'readProduct':
+        // Get a specific row
         $sql = "SELECT * FROM Products WHERE product_id=" . $_REQUEST['product_id'] . "";
         $headerSQL = "SELECT * FROM Products LIMIT 1";
 
         $header = $crud->readData($headerSQL);
         $row = $crud->readData($sql);
 
-        $view->createUpdateForm($row, $header);
+        $view->createFormTable($row, $header);
+        break;
+      case 'getUpdateProduct':
+        // Gets the update form for the product we will update
+        $productID = $_REQUEST['productID'];
+
+        $sql = "SELECT product_id,`product_type_code`, `supplier_id`, `product_name`, `product_price`, `other_products_details` FROM Products WHERE product_id=" . $productID . "";
+        $headerSQL = "SELECT * FROM Products";
+
+        $header = $crud->readData($sql);
+        $result = $crud->readData($sql);
+
+        $view->createUpdateForm($result, $header);
+
+
         break;
       case 'updateProduct':
+
         $sql = "UPDATE `Products` SET `product_type_code`='" . $_REQUEST['product_type_code'] . "',`supplier_id`='" . $_REQUEST['supplier_id'] . "',`product_name`='" . $_REQUEST['product_name'] . "',`product_price`='" . $_REQUEST['product_price'] . "',`other_products_details`='" . $_REQUEST['other_products_details'] . "' WHERE product_id='" . $_REQUEST['product_id'] . "'";
         echo $crud->UpdateData($sql);
         break;
@@ -69,11 +85,14 @@
 
         break;
       case 'search':
+        // To search
         $searchKeyword = $_REQUEST['searchValue'];
-        // $sql = "SELECT * FROM Products WHERE product_name LIKE % " . $product_name . " %";
-        // $sql = "SELECT * FROM Products WHERE product_name LIKE '%' '" . $product_name . "' '%'";
-        $sql = "SELECT * FROM Products WHERE product_name LIKE '%' '" . $searchKeyword . "' '%' OR other_products_details LIKE '%' '" . $searchKeyword . "' '%'";
-        $headerSQL = "SELECT * FROM Products LIMIT 1";
+
+
+        $sql = "SELECT product_id ,product_name, other_products_details FROM Products WHERE product_name LIKE '%' '" . $searchKeyword . "' '%' OR other_products_details LIKE '%' '" . $searchKeyword . "' '%'";
+        // We search on product name and product details
+
+        $headerSQL = "SELECT product_id ,product_name, other_products_details FROM Products LIMIT 1";
 
         $header = $crud->readData($headerSQL);
         $result = $crud->readData($sql);
@@ -88,7 +107,8 @@
         }
         break;
         case 'delete':
-          $sql = "DELETE FROM `Products` WHERE product_id=" . $_REQUEST['id'] . "";
+        // Delete a product
+          $sql = "DELETE FROM `Products` WHERE product_id=" . $_REQUEST['productID'] . "";
           echo $crud->deleteData($sql);
           break;
     }
