@@ -6,11 +6,12 @@
       // This function create the table where are froms in it
       $res = $row;
       echo "
-      <table style='text-align: center;' class='col-11 table-hover'>
+      <table style='text-align: center;' class='col-12 table-hover'>
 
       ";
       foreach ($header as $rowheader) {
         echo "<tr>";
+        echo "<td><input type='checkbox' class='selected' value='" . $rowheader['product_id'] . "'></td>";
         foreach ($rowheader as $key => $value) {
           // To display the TH
           echo "
@@ -22,10 +23,15 @@
       foreach ($res as $row) {
         // To display the content
         echo "<tr>";
+        echo "<td><input class='remove' type='checkbox'></td>";
         foreach ($row as $key => $value) {
-          else if ($key == "product_price") {
+          if ($key == "product_price") {
             // If we need to display a euro
             echo "<td>&euro; " . $value . "</td>";
+          }
+          else if ($key == "exp_date") {
+            $date = date("Ym", strtotime($value));
+            echo "<td>" . $date . "</td>";
           }
           else {
             // If the value isn't nummeric
@@ -105,13 +111,27 @@
       }
       echo "<button type='button' class='col-1' style='margin-top: 5px;' onclick=postAction('updateProduct');>Save!</button>";
     }
+    public function detailView($row, $header) {
+      // This function is used to create the detaul view of a record
+      // It is show below each col
+      echo "<table style='text-align: center;' class='col-12 table-hover'>";
+    }
     public function createPages($times) {
       // This function generates the pages
       echo "<ul class='col-12 inline underline'>";
       for ($i=0; $i < $times; $i++) {
-        echo "
-          <li onclick=GoToPage('" . $i . "');>" . $i . "</li>
-        ";
+        if ($i > 2) {
+          // After 3 pages we create a next page and stop the loop
+          echo "
+            <li onclick='GoToPage(\"next\", " . $times . ");'>Next</li>
+          ";
+          $i = $times + 1;
+        }
+        else {
+          echo "
+            <li onclick='GoToPage(" . $i . ", " . $times . ");'>" . $i . "</li>
+          ";
+        }
       }
       echo "</ul>";
     }

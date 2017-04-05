@@ -93,15 +93,46 @@ function getPages() {
   xhttp.open("GET", "ctrl.database.php?do=page", true);
   xhttp.send();
 }
-function GoToPage(pageNumber) {
-  console.log(pageNumber);
+
+var currentPage = 0;
+// Saves on which page we are now
+function GoToPage(pageNumber, max) {
+  // Max contains the maximum of pages we have
+  // This if because of the next function that it wont go past his pages
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      currentPage = pageNumber;
+      getPages();
+     showResult(this);
+    }
+  };
+  if (pageNumber == "next") {
+    // If we want to go to the next page
+    // We change the page number
+    // To the currentpage + 1
+    currentPage++;
+    if (currentPage == max || currentPage > max) {
+      // We do nothing
+      // Thats why we lower the currentpage
+      pageNumber = currentPage - 1;
+    }
+    else {
+      pageNumber = currentPage;
+    }
+  }
+  xhttp.open("GET", "ctrl.database.php?do=getPage&pageNumber=" + pageNumber, true);
+  xhttp.send();
+}
+function searchByDate(date) {
+  date = date.value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      showResult(this);
     }
   };
-  xhttp.open("GET", "ctrl.database.php?do=getPage&pageNumber=" + pageNumber, true);
+  xhttp.open("GET", "ctrl.database.php?do=searchDate&date=" + date, true);
   xhttp.send();
 }
 function status(status) {

@@ -52,7 +52,6 @@
 
         break;
       case 'updateProduct':
-
         $sql = "UPDATE `Products` SET `product_type_code`='" . $_REQUEST['product_type_code'] . "',`supplier_id`='" . $_REQUEST['supplier_id'] . "',`product_name`='" . $_REQUEST['product_name'] . "',`product_price`='" . $_REQUEST['product_price'] . "',`other_products_details`='" . $_REQUEST['other_products_details'] . "' WHERE product_id='" . $_REQUEST['product_id'] . "'";
         echo $crud->UpdateData($sql);
         break;
@@ -69,7 +68,7 @@
 
         break;
       case 'getPage':
-        $startsFrom = $_REQUEST['pageNumber'] * 5;
+        $startsFrom = intval($_REQUEST['pageNumber']) * 5;
         // This variable used to get the page number and * 5 to get the next page
 
         $sql = "SELECT * FROM Products LIMIT " . $startsFrom . "," . 5 . "";
@@ -106,11 +105,32 @@
           $view->createFormTable($result, $header);
         }
         break;
+        case 'searchDate':
+          $date = $_REQUEST['date'];
+          $date = date("Y-m" ,strtotime($date));
+
+          $sql = "SELECT * FROM Products WHERE exp_date LIKE '" . $date . "' '%'";
+          $header = "SELECT * FROM Products WHERE exp_date LIKE '" . $date . "' '%' LIMIT 1";
+
+          $rowCount = $crud->countRow($sql);
+
+          if ($rowCount > 0) {
+            // If we have some result to display
+            $row = $crud->readData($sql);
+            $headerSQL = $crud->readData($header);
+            $view->createFormTable($row, $headerSQL);
+          }
+          else {
+            $view->displayMessage("Niks gevonden");
+          }
+
+          break;
         case 'delete':
         // Delete a product
           $sql = "DELETE FROM `Products` WHERE product_id=" . $_REQUEST['productID'] . "";
           echo $crud->deleteData($sql);
           break;
+
     }
   }
 

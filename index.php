@@ -17,15 +17,20 @@
   </head>
   <body onload='GoToPage("0"); getPages();'>
     <div class="row">
-      <button class='col-2' onclick=getRequest('createFormForProduct'); type='button'>Create product</button>
       <div class="col-4">
         <input type="text" id="search" placeholder="Zoek op: productnaam en details"><button type="button" onclick="searchItem(search);">Zoeken</button>
       </div>
       <div class="col-6"></div>
+      <div class="col-8"></div>
+      <button type="button" class="col-2 fa fa-external-link" onclick="deleteSelected();">Verwijder</button>
+      <button class='col-2 fa fa-plus-circle' onclick=getRequest('createFormForProduct'); type='button'>Create product</button>
       <div id="content">
       </div>
-      <div id="pages">
+      <div class="col-4" id="pages">
       </div>
+      <div class="col-8">&nbsp;</div>
+      <div class="col-9"></div>
+      <input type="month" class="col-2" id="datePicker" /><button class="col-1" type="button" onclick="searchByDate(datePicker);">Zoek</button>
     </div>
   </body>
 </html>
