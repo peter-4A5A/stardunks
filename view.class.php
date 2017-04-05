@@ -122,8 +122,10 @@
       echo "<ul class='col-12 inline underline'>";
       for ($i=0; $i < $times; $i++) {
           echo "
-            <li onclick='GoToPage(" . $i . ", " . $times . ");'>" . $i . "</li>
-          ";
+            <li onclick='GoToPage(" . $i . ", " . $times . ");'>";
+            $i++;
+             echo $i . "</li>";
+             $i--;
           if ($i > 1) {
             // After 3 pages we create a next page and stop the loop
             echo "

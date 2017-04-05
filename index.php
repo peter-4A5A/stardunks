@@ -33,7 +33,7 @@
         </div>
         <div class="col-3"></div>
         <button type="button" class="col-2 fa fa-external-link roundButton"><a target="_blank" href="ctrl.database.php?do=csv&tableName=Products">CSV</a></button>
-        <input type="month" class="col-2" id="datePicker" /><button class="col-1 fa fa-search" type="button" onclick="searchByDate(datePicker);"></button>
+        <input type="month" class="col-2" id="datePicker" /><button type="button" class="col-1 fa fa-search roundButton" onclick="searchByDate(datePicker);"></button>
       </div>
     </div>
   </body>
