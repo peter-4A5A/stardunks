@@ -5,3 +5,15 @@
 .inline {
   display: inline-flex;
 }
+.roundButton {
+  border-radius: 0.6em;
+  background: white;
+  border: solid gray 0.1em;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.afterTable {
+  margin-top: 1em;
+}

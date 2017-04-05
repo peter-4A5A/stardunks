@@ -16,6 +16,7 @@
             <th>" . $key . "</th>
           ";
         }
+        echo "<th>Actions</th>";
         echo "</tr>";
       }
       foreach ($res as $row) {
@@ -39,9 +40,11 @@
           }
         }
         echo "
-              <td><button class='btn btn-secondary' type='button' onclick=getRequest('readProduct&product_id=" . $row['product_id'] . "');><i class='fa fa-book' aria-hidden='true'></i>Read</button>
-              <button class='btn btn-secondary' type='button' onclick=getRequest('getUpdateProduct&productID=" . $row['product_id'] . "');><i class='fa fa-pencil' aria-hidden='true'></i>Update</button>
-              <button class='btn btn-secondary' type='button' onclick=getRequest('delete&productID=" . $row['product_id'] . "');><i class='fa fa-trash-o' aria-hidden='true'></i>Delete</button></td>";
+              <td>
+                <i class='fa fa-book' aria-hidden='true' onclick=getRequest('readProduct&product_id=" . $row['product_id'] . "');></i>
+                <i onclick=getRequest('getUpdateProduct&productID=" . $row['product_id'] . "'); class='fa fa-pencil' aria-hidden='true'></i>
+                <i onclick=deleteData('" . $row['product_id'] . "'); class='fa fa-trash-o' aria-hidden='true'></i>
+              </td>";
         echo "<tr>";
       }
       echo "</table>";

@@ -28,14 +28,17 @@ function $(id) {
 }
 function deleteData(id) {
   // Delete a item
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     showResult(this);
-    }
-  };
-  xhttp.open("GET", "ctrl.database.php?do=delete&id=" + id, true);
-  xhttp.send();
+  var sure = confirm("Weet u dit zeker?");
+  if (sure == true) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       showResult(this);
+      }
+    };
+    xhttp.open("GET", "ctrl.database.php?do=delete&id=" + id, true);
+    xhttp.send();  
+  }
 }
 function postAction(action) {
   // Action contains on what we gonne do update or delete of create data
