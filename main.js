@@ -32,9 +32,6 @@ function deleteData(id) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
      showResult(this);
-    //  getRequest("getTable");
-    //  getPages();
-     console.log(id);
     }
   };
   xhttp.open("GET", "ctrl.database.php?do=delete&id=" + id, true);
@@ -134,6 +131,38 @@ function searchByDate(date) {
   };
   xhttp.open("GET", "ctrl.database.php?do=searchDate&date=" + date, true);
   xhttp.send();
+}
+function deleteSelected() {
+  var sure = confirm("Weet u dit zeker?");
+  var selected = document.getElementsByClassName('selected');
+  // Array with the selected
+
+  if (sure == true) {
+    // We want the remove
+    for (var i = 0; i < selected.length; i++) {
+      if (selected[i].checked) {
+      // Only use the selected elements
+      getRequest("delete&productID=" + selected[i].value);
+      getPages();
+      getRequest("getTable");
+      }
+    }
+  }
+}
+function selectAll() {
+  var selected = document.getElementsByClassName('selected');
+  if (selected[0].checked == true) {
+    // If we want to de the select all
+    for (var i = 0; i < selected.length; i++) {
+      selected[i].checked = true;
+    }
+  }
+  else if (selected[0].checked == false) {
+    // If we want to deselect
+    for (var i = 0; i < selected.length; i++) {
+      selected[i].checked = false;
+    }
+  }
 }
 function status(status) {
   $("status").innterHTML = status.responseText;

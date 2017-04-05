@@ -6,12 +6,10 @@
       // This function create the table where are froms in it
       $res = $row;
       echo "
-      <table style='text-align: center;' class='col-12 table-hover'>
-
-      ";
+      <table style='text-align: center;' class='col-12 table-hover'>";
       foreach ($header as $rowheader) {
         echo "<tr>";
-        echo "<td><input type='checkbox' class='selected' value='" . $rowheader['product_id'] . "'></td>";
+        echo "<td><input type='checkbox' onchange='selectAll();' class='selected' value='All'></td>";
         foreach ($rowheader as $key => $value) {
           // To display the TH
           echo "
@@ -23,7 +21,7 @@
       foreach ($res as $row) {
         // To display the content
         echo "<tr>";
-        echo "<td><input class='remove' type='checkbox'></td>";
+        echo "<td><input type='checkbox' class='selected' value='" . $row['product_id'] . "'></td>";
         foreach ($row as $key => $value) {
           if ($key == "product_price") {
             // If we need to display a euro
@@ -120,18 +118,16 @@
       // This function generates the pages
       echo "<ul class='col-12 inline underline'>";
       for ($i=0; $i < $times; $i++) {
-        if ($i > 2) {
-          // After 3 pages we create a next page and stop the loop
-          echo "
-            <li onclick='GoToPage(\"next\", " . $times . ");'>Next</li>
-          ";
-          $i = $times + 1;
-        }
-        else {
           echo "
             <li onclick='GoToPage(" . $i . ", " . $times . ");'>" . $i . "</li>
           ";
-        }
+          if ($i > 1) {
+            // After 3 pages we create a next page and stop the loop
+            echo "
+              <li onclick='GoToPage(\"next\", " . $times . ");'>Next</li>
+            ";
+            $i = $times + 1;
+          }
       }
       echo "</ul>";
     }
