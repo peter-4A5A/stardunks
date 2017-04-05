@@ -124,6 +124,7 @@
           echo "
             <li onclick='GoToPage(" . $i . ", " . $times . ");'>";
             $i++;
+            // To display page 0 as 1
              echo $i . "</li>";
              $i--;
           if ($i > 1) {
