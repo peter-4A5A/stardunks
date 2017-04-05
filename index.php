@@ -22,14 +22,16 @@
       </div>
       <div class="col-6"></div>
       <div class="col-8"></div>
-      <button type="button" class="col-2 fa fa-external-link" onclick="deleteSelected();">Verwijder</button>
+      <button type="button" class="col-2" onclick="deleteSelected();">Verwijder</button>
       <button class='col-2 fa fa-plus-circle' onclick=getRequest('createFormForProduct'); type='button'>Create product</button>
       <div id="content">
       </div>
       <div class="col-4" id="pages">
       </div>
       <div class="col-8">&nbsp;</div>
-      <div class="col-9"></div>
+      <div class="col-7"></div>
+
+      <button type="button" class="col-2 fa fa-external-link"><a target="_blank" href="ctrl.database.php?do=csv&tableName=Products">CSV</a></button>
       <input type="month" class="col-2" id="datePicker" /><button class="col-1" type="button" onclick="searchByDate(datePicker);">Zoek</button>
     </div>
   </body>

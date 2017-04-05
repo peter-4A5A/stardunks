@@ -125,6 +125,54 @@
           }
 
           break;
+        case 'csv':
+          $tableName = $_REQUEST['tableName'];
+
+          $sql = "SELECT * FROM " . $tableName . "";
+          $rowCount = $crud->countRow($sql);
+
+          if ($rowCount > 0) {
+            // We create a csv
+            $result = $crud->readData($sql);
+
+            // $file = tmpfile();
+            $file = fopen('test.csv', 'w');
+            $fileName = "test.csv";
+
+            foreach ($result as $row) {
+              fputcsv($file, $row);
+            }
+
+            fclose($file);
+            // https://www.tutorialspoint.com/http/http_header_fields.htm
+            header('Content-Description: File Transfer');
+            // We gone send something
+            header('Content-Disposition: attachment; filename="'.$fileName.'"');
+
+            header('Content-Type: application/octet-stream');
+            // Type of request
+
+            header('Content-Transfer-Encoding: binary');
+            // Witch codeing we use to send
+            header('Content-Length: ' . filesize($fileName));
+            // Size of a file
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            // Control cache
+            // must-revalidate
+            // The cache must verify the status bevore expire one
+            header('Pragma: public');
+            // Bt who can use it
+            header('Expires: 0');
+            // How long the response if falid
+
+            readfile($fileName);
+            // Download the file
+          }
+          else {
+            echo "Doesn't exists";
+          }
+          // fclose("test.csv");
+          break;
         case 'delete':
         // Delete a product
           $sql = "DELETE FROM `Products` WHERE product_id=" . $_REQUEST['productID'] . "";
